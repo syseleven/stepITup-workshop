@@ -1,0 +1,14 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: php-apache
+spec:
+  maxReplicas: 10
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: php-apache
+  # target refers to the CPU requests of the whole pod
+  # it is mandatory to set resource requests to be able to use HPA
+  targetCPUUtilizationPercentage: 25

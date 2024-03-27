@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: affinity-deployment
+  labels:
+    app: affinity-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: affinity-deployment
+  template:
+    metadata:
+      labels:
+        app: affinity-deployment
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                  - linux
+      containers:
+        - name: nginx
+          image: nginx

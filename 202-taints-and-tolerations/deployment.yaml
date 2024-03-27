@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toleration-deployment
+  labels:
+    app: toleration-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: toleration-deployment
+  template:
+    metadata:
+      labels:
+        app: toleration-deployment
+    spec:
+      tolerations:
+        - key: "workshop"
+          operator: "Exists"
+          effect: "NoExecute"
+      containers:
+        - name: nginx
+          image: nginx

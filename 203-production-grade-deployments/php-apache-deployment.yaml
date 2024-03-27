@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: php-apache
+  name: php-apache
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: php-apache
+  strategy:
+    rollingUpdate:
+      # updating a deployment should create 100% of all pods
+      maxSurge: 100%
+      # updating a deployment should only cause a max. of 50% of all pods to be unavailable at the same time
+      maxUnavailable: 50%
+  template:
+    metadata:
+      labels:
+        app: php-apache
+    spec:
+      affinity:
+        # pod should not be scheduled on the same node
+        podAntiAffinity:
+          # but if it is already running there then nevermind
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                # make decision upon these labels
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - php-apache
+                # should affect nodes depending on their names
+                topologyKey: "kubernetes.io/hostname"
+      containers:
+      #- image: nginx
+      - image: gcr.io/google_containers/hpa-example
+        name: hpa-example
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 70m
+          limits:
+            memory: 64Mi
+            cpu: 70m
+        ports:
+          - containerPort: 80
+            name: http
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /var/www/html/index.php
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 1
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
