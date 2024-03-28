@@ -14,7 +14,7 @@ spec:
       labels:
         app: toleration-deployment
     spec:
-      nodeName: "loving-carson-569c8dfc7b-b2xwz"
+      nodeName: "<NODE-NAME>"
       tolerations:
         - key: "workshop"
           operator: "Exists"
