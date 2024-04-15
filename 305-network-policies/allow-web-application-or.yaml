@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-web-application-or
+spec:
+  podSelector:
+    matchLabels:
+      app: web-application
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            network-policy/web-application: allow
+      - podSelector:
+          matchLabels:
+            role: friend
