@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: affinity-deployment
+  name: deployment-node-affinity
   labels:
-    app: affinity-deployment
+    app: deployment-node-affinity
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: affinity-deployment
+      app: deployment-node-affinity
   template:
     metadata:
       labels:
-        app: affinity-deployment
+        app: deployment-node-affinity
     spec:
       affinity:
         nodeAffinity:
