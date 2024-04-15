@@ -13,12 +13,12 @@ kubectl config set-context --current --namespace="${YOURNAME}"
 
 ---
 
-## Exercise
+## Exercise 1 - Node Affinity
 
 * Create a deployment using node affinity
 
   ```shell
-  kubectl apply -f deployment.yaml
+  kubectl apply -f deployment-node-affinity.yaml
   ```
 
 * This deployment uses the label selector `kubernetes.io/os=linux`.
@@ -43,29 +43,35 @@ kubectl config set-context --current --namespace="${YOURNAME}"
 * Edit the deployment to use the new label for affinity
 
   ```shell
+  kubectl edit deployment deployment-node-affinity
+  ```
+
+  ```yaml
   # change the key and value to match your new label
-  kubectl edit deployment affinity-deployment
   ...
   - matchExpressions:
-  - key: my-label
-    operator: In
-    values:
-    - <MY-NAME>
+    - key: my-label # <-- adjust here
+      operator: In
+      values:
+      - <MY-NAME> # <-- adjust here
   ...
   ```
 
-* Watch where pods are being scheduled now
+* Display the node where pods are now being scheduled on
 
    ```shell
    kubectl get pods -o wide
    ```
 
----
-
 ### Clean up
 
 * Lets tear down everything
 
-```shell
-kubectl delete -f deployment.yaml
-```
+  ```shell
+  kubectl delete -f deployment-node-affinity.yaml
+  ```
+
+---
+
+## Exercise 2 - Pod Anti Affinity
+

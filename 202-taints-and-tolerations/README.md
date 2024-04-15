@@ -33,7 +33,7 @@ kubectl config set-context --current --namespace="${YOURNAME}"
 * Spin up a deployment with a toleration
 
   ```shell
-  kubectl apply -f deployment.yaml
+  kubectl apply -f toleration-deployment.yaml
   ```
 
 * Note that the pods *might* be scheduled on the node now but they can still run on any node
@@ -65,5 +65,5 @@ kubectl config set-context --current --namespace="${YOURNAME}"
 * Lets tear down everything
 
 ```shell
-kubectl delete -f deployment.yaml
+kubectl delete -f toleration-deployment.yaml
 ```
