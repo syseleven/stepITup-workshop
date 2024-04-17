@@ -7,6 +7,9 @@
 - `kubectx-foreach` -> https://github.com/ahmetb/kubectl-foreach
 - `kubectl-convert` ->  https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin
 - `kubectl-neat` -> https://github.com/itaysk/kubectl-neat
+- `kubectl-node-shell` -> https://github.com/kvaps/kubectl-node-shell
+- `kubectl-df-pv` -> https://github.com/yashbhutwala/kubectl-df-pv
+- `kubectl-get-all` -> https://github.com/corneliusweig/ketall
 - `helm` -> https://helm.sh/docs/intro/install/
 - `stern`-> https://github.com/stern/stern
 
