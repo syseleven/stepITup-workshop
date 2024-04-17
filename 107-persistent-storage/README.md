@@ -95,7 +95,7 @@
   kubectl port-forward svc/webserver-with-storage 8080:80
   ```
 
-* Open your Browser and check http://localhost:8080
+* Open your Browser and check [http://localhost:8080](http://localhost:8080)
 * Open another terminal and delete pod
 
   ```shell
@@ -108,7 +108,7 @@
   kubectl port-forward svc/webserver-with-storage 8080:80
   ```
 
-* Open your Browser again http://localhost:8080
+* Open your Browser again [http://localhost:8080](http://localhost:8080)
 * You should receive the same result since PVC left untouched
 
 ### Optional: Cleanup
